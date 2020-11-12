@@ -17,7 +17,6 @@
 
 - has_many    :items
 - has_many    :comments
-  belongs to  :addresses
   has_many    :purchases
 
 
@@ -38,7 +37,6 @@
 
 - belongs_to    :user
 - has_many      :comments
-  belongs_to    :address
   has_one       :purchase
 
 
@@ -60,16 +58,16 @@
 | Column               | Type        | Options           |
 | -------------------- | ---------   | ----------------- |
 | purchase             | references  | foreign_key: true |
-| postal code          | string      | null: false       |
-| prefecture           | string      | null: false       |
-| municipality         | string      | null: false       |
+| postal_code          | string      | null: false       |
+| prefecture _id       | integer     | null: false       |
+| city                 | string      | null: false       |
 | house_number         | string      | null: false       |
-| building_name        | string      | null: false       |
+| building_name        | string      |                   |
 | phone_number         | string      | null: false       |
 
 ### Association
-- belongs_to : user
 - belongs_to : purchase
+
 
 
 
