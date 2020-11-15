@@ -14,14 +14,14 @@
       <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>
       <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
     </ul>
-    <% if user_signed_in? %>
     <ul class='lists-right'>
+    <% if user_signed_in? %> 
           <%= link_to current_user.nick_name, "#", class: "user-nickname"%>
           <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout"%>
     <% else %>
           <%= link_to 'ログイン', user_session_path, class: "login"%>
           <%= link_to '新規登録', new_user_registration_path, class: "sign-up"%>
+    <% end %>      
     </ul>
-    <% end %>
   </div>
 </header>
