@@ -59,15 +59,15 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping can't be blank")
       end
-      it "販売金額が ¥300以下だと保存できない" do
-        @item.price =200
+      it "販売金額が ¥300未満だと保存できない" do
+        @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than 300")
+        expect(@item.errors.full_messages).to include("Price must be greater than 299")
       end
-      it "販売金額が ¥10,000,000以上だと保存できない" do
-        @item.price =10000001
+      it "販売金額が ¥10000000以上だと保存できない" do
+        @item.price = 10000000
         @item.valid? 
-        expect(@item.errors.full_messages).to include("Price must be less than 9999999")
+        expect(@item.errors.full_messages).to include("Price must be less than 10000000")
       end
       it "販売金額が半角数字以外だと保存できない" do
         @item.price= "１２三し⑤"
