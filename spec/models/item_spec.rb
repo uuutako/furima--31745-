@@ -84,6 +84,31 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("User must exist")
       end
+      it "category_idが[1]だと保存できない" do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+      it "condition_idが[1]だと保存できない" do
+        @item.condition_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+      end
+      it "postage_idが[1]だと保存できない" do
+        @item.postage_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Postage must be other than 1")
+      end
+      it "region_idが[1]だと保存できない" do
+        @item.region_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Region must be other than 1")
+      end
+      it "shipping_idが[1]だと保存できない" do
+        @item.shipping_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping must be other than 1")
+      end
     end
   end
 end
