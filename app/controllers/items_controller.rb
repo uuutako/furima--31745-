@@ -1,9 +1,8 @@
 class ItemsController < ApplicationController
 
   def index 
-    @item = Item.order("created_at DESC")
+    @items = Item.includes(:user),order("created_at DESC")
     @items = Item.all
-    @items = @item.includes(:user)
   end
 
   
