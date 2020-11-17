@@ -24,7 +24,7 @@
 
 | Column               | Type        | Options           |
 | -------------------- | ----------- | ----------------- |
-|name                  | string      | null: false       |
+| name                 | string     | null: false       |
 | price                | integer     | null: false       |
 | concept              | text        | null: false       |
 | category_id          | integer     | null: false       |
@@ -61,7 +61,7 @@
 | -------------------- | ---------   | ----------------- |
 | purchase             | references  | foreign_key: true |
 | postal_code          | string      | null: false       |
-| prefecture _id       | integer     | null: false       |
+| region_id            | integer     | null: false       |
 | city                 | string      | null: false       |
 | house_number         | string      | null: false       |
 | building_name        | string      |                   |
