@@ -14,6 +14,10 @@ RSpec.describe ::PurchaseAddress, type: :model do
       it '全てのデータが存在すれば保存できる' do
         expect(@purchase_address).to be_valid
       end
+      it '建物名が空でも保存できる' do
+      @purchase_address.building_name = ""
+      expect(@purchase_address).to be_valid
+      end
     end
     context '住所が保存できないとき ' do
       it 'postal_codeが空だと保存できない' do
@@ -77,6 +81,16 @@ RSpec.describe ::PurchaseAddress, type: :model do
         @purchase_address.token = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it "region_idが1だと保存できない" do
+        @purchase_address.region_id = 1
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Region can't be blank")
+      end
+      it "電話番号は数字のみでないと（ハイフンが含まれていると）保存できない" do
+        @purchase_address.phone_number = '090-1234-5678'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
       end
     end
   end

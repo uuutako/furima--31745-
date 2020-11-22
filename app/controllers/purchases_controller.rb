@@ -1,10 +1,10 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: [:index] 
+  before_action :set_item, only:[:index, :create, :move_to_root_path]
   before_action :move_to_root_path, only:[:index]
-
+ 
 
   def index 
-    @item = Item.find(params[:item_id]) 
     @purchase_address = PurchaseAddress.new 
   end
  
@@ -13,7 +13,6 @@ class PurchasesController < ApplicationController
   end
  
   def create
-    @item = Item.find(params[:item_id]) 
     @purchase_address = PurchaseAddress.new(purchase_params) 
      if @purchase_address.valid?
         pay_item 
@@ -33,18 +32,21 @@ class PurchasesController < ApplicationController
   end
 
   def move_to_root_path
-    @item = Item.find(params[:item_id]) 
     if @item.user.id == current_user.id || @item.purchase.present?
     redirect_to root_path
     end
   end
 
+  def set_item
+    @item = Item.find(params[:item_id]) 
+  end
+
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
-        amount: @item[:price],  # 商品の値段
-        card: purchase_params[:token],    # カードトークン
-        currency: 'jpy'                 # 通貨の種類（日本円）
+        amount: @item[:price], 
+        card: purchase_params[:token],  
+        currency: 'jpy'     
       )
   end
 
