@@ -56,8 +56,10 @@ ActiveRecord::Schema.define(version: 2020_11_19_115755) do
     t.integer "region_id", null: false
     t.integer "shipping_id", null: false
     t.bigint "user_id"
+    t.string "ancestry"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["ancestry"], name: "index_items_on_ancestry"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 

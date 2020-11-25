@@ -30,9 +30,20 @@ class Item < ApplicationRecord
   has_one       :purchase
   has_one_attached :image
 
+
   belongs_to :category
   belongs_to :condition  # アクティブハッシュのrb名を全て書く(aosise-syonn)
   belongs_to :postage
   belongs_to :region
   belongs_to :shipping
+
+  def self.search(search)
+    if search != ""
+      Item.where('name LIKE(?)', "%#{search}%")
+    else
+      Item.all
+    end
+  end
+
+
 end

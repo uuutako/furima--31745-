@@ -42,20 +42,24 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search
+    @items = Item.search(params[:keyword])
+  end
+
 end
 
   private
 
-def item_params
-  params.require(:item).permit(:name, :concept, :category_id, :condition_id, :shipping_id, :region_id, :postage_id, :image, :price).merge(user_id: current_user.id)
-end
-
-def move_to_index
-  @item = Item.find(params[:id])
-  unless @item.user == current_user
-  redirect_to action: :index
+  def item_params
+    params.require(:item).permit(:name, :concept, :category_id, :condition_id, :shipping_id, :region_id, :postage_id, :image, :price).merge(user_id: current_user.id)
   end
-end
+
+  def move_to_index
+    @item = Item.find(params[:id])
+    unless @item.user == current_user
+    redirect_to action: :index
+    end
+  end
 
   def set_item
     @item = Item.find(params[:id])
@@ -64,4 +68,3 @@ end
   def set_purchase
     @purchase = Purchase.all
   end
-
