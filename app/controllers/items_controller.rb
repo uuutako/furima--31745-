@@ -44,12 +44,12 @@ class ItemsController < ApplicationController
 
   def search
     @items = Item.search(params[:keyword])
-  end
-
+  end   
+ 
 end
 
   private
-
+  
   def item_params
     params.require(:item).permit(:name, :concept, :category_id, :condition_id, :shipping_id, :region_id, :postage_id, :image, :price).merge(user_id: current_user.id)
   end
