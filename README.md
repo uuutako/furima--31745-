@@ -24,7 +24,7 @@
 
 | Column               | Type        | Options           |
 | -------------------- | ----------- | ----------------- |
-| name                 | string     | null: false       |
+| name                 | string      | null: false       |
 | price                | integer     | null: false       |
 | concept              | text        | null: false       |
 | category_id          | integer     | null: false       |
@@ -40,8 +40,6 @@
 - belongs_to    :user
 - has_many      :comments
   has_one       :purchase
-  has_many      :tag, through: :photos_tags
-  has_many      :items_tags
 
 ### purchases テーブル
 
@@ -72,42 +70,4 @@
 - belongs_to : purchase
 
 
-
-
-### comments テーブル
-
-| Column      | Type       | Options           |
-| ----------- | ---------- | ----------------- |
-| user        | references | foreign_key: true |
-| comments    | text       | null: false       |
-| item        | references | foreign_key: true |
-
-### Association
-- belongs_to : users
-- belongs_to : items
-
-
-
-### tag テーブル
-
-| Column      | Type       | Options           |
-| ----------- | ---------- | ----------------- |
-| tag         | text       | foreign_key: true |
-
-### Association
-- has_many :items_tags
-- has_many : items,  through: :items_tags
-
-
-
-### item_tag テーブル フォームオブジェクト
-
-| Column      | Type       | Options           |
-| ----------- | ---------- | ----------------- |
-| tag         | references | foreign_key: true |
-| item        | references | foreign_key: true |
-
-### Association
-- belongs to : tag
-- belongs to : item
 
